@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f7f2"><meta name="description" content="Explore particle swarm optimization on live contour maps and replay a lecture calculation one move at a time.">
+<title>Swarm Atlas · Particle Swarm Optimization</title>
+<style>:root{--paper:#f7f8f3;--panel:#fffefa;--ink:#152e29;--muted:#50645c;--line:#ced7c9;--green:#075a49;--lime:#c8ed89;--mono:"IBM Plex Mono",Consolas,monospace;--serif:"Instrument Serif",Georgia,"Times New Roman",serif;color-scheme:light}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.45 "Instrument Sans","Segoe UI",Arial,sans-serif}button,select,input{font:inherit;color:inherit}button,select,summary,input[type=range],input[type=checkbox]{cursor:pointer}button{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:1px solid var(--line);border-radius:6px;padding:9px 14px;font-size:.9rem;font-weight:600}button:hover,select:hover{background-color:#e8eee5}button:disabled{opacity:.5;cursor:default}button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #bc7a24;outline-offset:3px}i{display:inline-flex;align-items:center}i svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;fill:none}header{border-bottom:1px solid var(--line);background:#fbfcf7}.navwrap,main,footer{width:min(1440px,92%);margin:auto}.navwrap{height:73px;display:flex;align-items:center;gap:20px}.brand,.brandmini{font:600 1.7rem var(--serif);letter-spacing:-1.6px;color:#173f31;text-decoration:none}.brand{display:flex;align-items:center;gap:10px}.brand canvas{width:38px;height:38px}.brandtype{border-left:1px solid var(--line);padding-left:20px;color:var(--muted);font-size:.85rem}nav{margin-left:auto;display:flex;gap:10px}nav button{border-color:transparent}nav button:last-child{border-color:var(--line);background:#f4f7ee}main{padding-bottom:32px}.intro{min-height:155px;position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:25px 0}.intro h1{font:normal clamp(2.4rem,4.6vw,4.65rem)/1.08 var(--serif);letter-spacing:-.058em;margin:0 0 12px}.intro em{color:#24745b;font-weight:normal}.intro p,.notebody p{color:var(--muted);margin:0}.intro canvas{width:clamp(140px,16vw,220px);height:auto;flex:none}.workspace{display:grid;grid-template-columns:minmax(0,2.55fr) minmax(255px,1fr);gap:18px;align-items:stretch}.board,.setup,.notebook,.inspection{border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}.board{display:flex;flex-direction:column}.board-head,.notetop{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 21px}.board h2,.notetop h2,.sectionhead{display:flex;align-items:center;gap:10px}h2{font:500 1.55rem/1.2 var(--serif);letter-spacing:-.045em;margin:0}.switch{display:flex;border:1px solid var(--line);border-radius:6px;padding:3px;gap:2px;background:#f0f3ec}.switch button{font-size:.8125rem;border:0;padding:5px 10px;font-weight:500}.switch button[aria-pressed=true]{color:#fff;background:#285646}.plotbox{isolation:isolate;position:relative;flex:1;min-height:328px;background:#0c2d2c;margin:0 9px;border-radius:7px;overflow:hidden}.plotbox canvas{position:absolute;width:100%;height:100%;display:block;cursor:crosshair}.maplabel,.status{position:absolute;top:16px;pointer-events:none;font:500 .75rem var(--mono);color:#e1eee0;background:#102f2af0;border:1px solid #698977;border-radius:4px;padding:6px 9px}.maplabel{left:17px;text-transform:uppercase;letter-spacing:.08em}.status{right:17px;background:#19382bea;color:#e6f6d0;border-color:#55795f;display:flex;align-items:center;gap:7px}.status:before{content:"";width:6px;height:6px;border-radius:50%;background:#c9e4a8}.plotkey{display:flex;align-items:center;gap:17px;min-height:45px;padding:8px 21px;font-size:.8rem;color:#4e6258;flex-wrap:wrap}.plotkey span{display:inline-flex;align-items:center;gap:6px}.keydot,.keybest,.keyprobe{display:inline-block;width:8px;height:8px;background:#357b68;border-radius:50%}.keybest{border-radius:0;transform:rotate(45deg);background:#d79736}.keyprobe{border:2px solid #419e89;background:transparent}.transport{border-top:1px solid var(--line);padding:13px 19px;display:flex;align-items:center;gap:8px}.primary{background:var(--green);border-color:var(--green);color:white}.primary:hover{background:#134b3c}.transport .primary{min-width:99px}.transport button{height:39px}.speed,.particlepick{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted)}.speed{margin-left:auto}select{appearance:none;border:1px solid #c5cfc1;border-radius:5px;padding:8px 32px 8px 10px;background:#f9faf5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='m2 2 4 4 4-4' fill='none' stroke='%23284135' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 11px center}.setup{padding:21px 23px}.sectionhead{margin-bottom:20px}.sectionhead i,.board-head h2 i,.notetop i{color:#44755d}.caption,.eyeline{font:600 .75rem/1.4 var(--mono);text-transform:uppercase;letter-spacing:.09em;color:#526e58}.setup>select{display:block;width:100%;margin-top:6px;font-size:.94rem;font-weight:600}.hint{font-size:.875rem;line-height:1.4;color:var(--muted);margin:8px 0 0}.rule{height:1px;background:var(--line);margin:17px 0}.sliderlist{display:grid;gap:12px}.slidertop,.toggleline{display:flex;align-items:center;justify-content:space-between;gap:8px}.slidertop label,.toggleline{font-size:.9rem;font-weight:550}.slidertop small{font:italic .9rem Georgia;color:var(--muted);margin-left:5px}.slidertop output{font: .8rem var(--mono);background:#eef2e8;border-radius:4px;padding:2px 6px}.sliderlist input{appearance:none;display:block;width:100%;height:4px;margin:10px 0 4px;border-radius:2px;background:linear-gradient(to right,#497c5e var(--pct),#dfe5d9 var(--pct))}.sliderlist input::-webkit-slider-thumb{appearance:none;width:13px;height:13px;background:#fffefa;border:3px solid #397353;border-radius:50%}.sliderlist input::-moz-range-thumb{width:9px;height:9px;background:#fffefa;border:2px solid #397353;border-radius:50%}.toggleline input{appearance:none;width:32px;height:19px;border:1px solid #91a08f;border-radius:12px;background:#aab6a6;position:relative;margin:0}.toggleline input:checked{background:#29664d}.toggleline input:before{content:"";width:13px;height:13px;background:white;border-radius:50%;position:absolute;left:2px;top:2px}.toggleline input:checked:before{left:15px}.small{font-size:.8rem}.notebook,.inspection{margin-top:18px}.notetop{border-bottom:1px solid var(--line);padding-block:14px}.mono,.metrics strong,td,.equation,.num{font-family:var(--mono);font-variant-numeric:tabular-nums}.mono{font-size:.82rem;color:var(--muted)}.notebody{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(250px,1fr);align-items:center;gap:25px;padding:21px}.notebody h3,dialog h3{font:500 1.55rem var(--serif);margin:5px 0 7px;letter-spacing:-.035em}.metrics{display:flex;align-items:stretch;border-left:1px solid var(--line);padding-left:24px;gap:22px}.metrics span{font-size:.82rem;color:var(--muted);display:block}.metrics strong{font-size:1.02rem;display:block;color:var(--green);margin-top:4px}.probe,details{padding:17px 21px}.probe{display:grid;grid-template-columns:1fr 1.4fr;gap:22px;align-items:center}.probe p{margin:4px 0;font-size:.92rem}.terms{display:flex;gap:14px;flex-wrap:wrap}.term{min-width:75px}.term span{display:block;color:var(--muted);font-size:.8rem}.term b{font:500 .87rem var(--mono)}details{border-top:1px solid var(--line)}summary{font-weight:600;font-size:.9rem}.scrolltable{overflow:auto}table{border-collapse:collapse;width:100%;font-size:.83rem;margin:12px 0}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-weight:600}.activeRow{background:#edf4e5}footer{border-top:1px solid var(--line);padding:19px 0 30px;display:flex;justify-content:space-between;color:var(--muted);font-size:.82rem}footer span:first-child{font:600 1.15rem var(--serif)}dialog{color:var(--ink);border:1px solid var(--line);border-radius:14px;background:var(--panel);width:min(650px,94vw);padding:0;max-height:88vh}dialog::backdrop{background:#112d26a8}.modalhead{display:flex;justify-content:space-between;padding:14px 21px;align-items:center;border-bottom:1px solid var(--line)}.brandmini{font-size:1.3rem}.modalhead button{border:0;padding:6px}#reading{padding:20px 25px 27px}#reading h2{font-size:2.3rem}#reading p{font-size:.96rem;line-height:1.55}.equation{padding:14px;background:#eaf1e5;border-left:3px solid #71946a;border-radius:4px;font-size:.9rem;line-height:1.65}.sources{border-top:1px solid var(--line);padding-top:13px;color:var(--muted)}.passed{font-weight:600;color:#23613d}
+@media(min-width:1600px){.intro{min-height:176px}.plotbox{min-height:400px}}
+@media(max-width:920px){.workspace{grid-template-columns:minmax(0,1.8fr) minmax(230px,1fr);gap:12px}.setup{padding:17px}.board-head,.notetop{padding-inline:14px}.intro canvas{width:130px}.metrics{flex-direction:column;gap:8px}.plotkey{gap:11px}.brandtype{display:none}}
+@media(max-width:720px){.navwrap,main,footer{width:94%}.navwrap{height:61px;gap:3px}.brand{font-size:1.4rem;gap:6px}.brand canvas{width:29px;height:29px}nav{gap:0}nav button{padding:7px;font-size:.79rem;gap:5px}nav svg{width:15px}.intro{min-height:130px;padding:25px 0}.intro h1{font-size:clamp(2.25rem,7vw,3.3rem)}.intro p{font-size:.94rem}.intro canvas{display:none}.workspace{grid-template-columns:minmax(0,1fr)}.plotbox{min-height:320px}.setup{padding:18px}.sliderlist{grid-template-columns:1fr 1fr;column-gap:26px}.sectionhead{margin-bottom:12px}.notebody,.probe{grid-template-columns:1fr;gap:16px}.metrics{flex-direction:row;border:0;border-top:1px solid var(--line);padding:13px 0 0;gap:24px}.notebody{padding:16px}.plotkey{padding:10px 14px}.maplabel,.status{font-size:.72rem}footer{gap:12px}.brandtype{display:none}.transport{padding:12px}.speed{font-size:.8125rem}.switch button{padding:5px 7px}.board-head{gap:6px}.board-head h2,.notetop h2{font-size:1.3rem}.plotbox{margin:0 5px}}
+@media(max-width:390px){nav i{display:none}.transport{gap:5px}.transport button{padding-inline:9px}.transport .primary{min-width:76px}.board-head h2 i{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body>
+<header><div class="navwrap"><a class="brand" href="#top"><canvas id="mark" width="78" height="78" aria-hidden="true"></canvas>Swarm Atlas</a><span class="brandtype">Optimization lab</span><nav aria-label="Learning resources"><button id="guideBtn"><i data-icon="book"></i>Field guide</button><button id="exampleBtn"><i data-icon="calc"></i>Worked example</button></nav></div></header>
+<main id="top">
+<section class="intro"><div><h1>Particle Swarm <em>Optimization</em></h1><p>Follow a swarm as it learns from its own discoveries and the best of the group.</p></div><canvas id="engraving" width="420" height="190" aria-hidden="true"></canvas></section>
+<div class="workspace">
+<section class="board">
+<div class="board-head"><h2><i data-icon="map"></i>Swarm field</h2><div class="switch" aria-label="Visualization"><button id="mapTab" aria-pressed="true">Landscape</button><button id="chartTab" aria-pressed="false">Convergence</button></div></div>
+<div class="plotbox"><canvas id="plot" aria-label="Swarm landscape. Select a particle on the plot or use the particle inspector below."></canvas><span class="maplabel" id="maplabel"></span><span id="status" class="status"></span></div>
+<div class="plotkey" id="legend"></div>
+<div class="transport"><button id="play" class="primary"></button><button id="step"><i data-icon="step"></i>Step</button><button id="reset" aria-label="Reset simulation" title="Reset simulation"><i data-icon="reset"></i></button><label class="speed">Speed <select id="speed"><option value="1700">0.5×</option><option selected value="850">1×</option><option value="425">2×</option><option value="210">4×</option></select></label></div>
+</section>
+<aside class="setup"><div class="sectionhead"><i data-icon="sliders"></i><h2>Experiment setup</h2></div>
+<label class="caption" for="problem">Objective function</label><select id="problem"></select><p class="hint" id="problemHint"></p>
+<div class="rule"></div><div class="sliderlist" id="sliders"></div>
+<div class="rule"></div><div class="toggleline"><label for="trails">Particle trails</label><input type="checkbox" role="switch" id="trails" checked></div>
+<p id="configHint" class="hint small">Changing a parameter restarts the run from the same seed.</p>
+</aside></div>
+<section class="notebook"><div class="notetop"><h2><i data-icon="notes"></i>Step notebook</h2><span id="iteration" class="mono"></span></div><div class="notebody"><div><div id="phaseLine" class="eyeline"></div><h3 id="stepTitle"></h3><p id="explain"></p></div><div class="metrics"><div><span>Best fitness</span><strong id="fitness"></strong></div><div><span>Best position</span><strong id="bestPosition"></strong></div></div></div></section>
+<section class="inspection"><div class="notetop"><h2><i data-icon="cross"></i>Particle inspector</h2><label class="particlepick">Track <select id="particle"></select></label></div><div id="probe" class="probe"></div><details id="population"><summary>View swarm data</summary><div class="scrolltable"><table><thead><tr><th>Particle</th><th>Position</th><th>Velocity</th><th>Fitness</th><th>Personal best</th><th>Best fitness</th></tr></thead><tbody id="rows"></tbody></table></div></details></section>
+</main><footer><span>Swarm Atlas</span><span>Particle swarm optimization laboratory</span></footer>
+<dialog id="reader"><div class="modalhead"><span class="brandmini">Swarm Atlas</span><button id="close" aria-label="Close dialog"><i data-icon="close"></i></button></div><div id="reading"></div></dialog>
+<script>"use strict";
+const objectives = {
+  peaks: {name:"Peaks landscape", dimension:2, limit:3, max:true, target:"8.1062 near (−0.0093, 1.5814)", description:"Three hills compete. Search for the highest summit.", fn:([x,y]) => 3*(1-x)**2*Math.exp(-x*x-(y+1)**2)-10*(x/5-x**3-y**5)*Math.exp(-x*x-y*y)-Math.exp(-((x+1)**2)-y*y)/3},
+  bowl: {name:"Quadratic bowl", dimension:1, limit:5, max:false, target:"0 at x = 0", description:"Follow a smooth bowl down to its lowest point.", fn:([x]) => x*x},
+  rastrigin: {name:"Rastrigin field", dimension:2, limit:5.12, max:false, target:"0 at (0, 0)", description:"Find the deepest basin among repeating local valleys.", fn:([x,y]) => 20+x*x+y*y-10*(Math.cos(2*Math.PI*x)+Math.cos(2*Math.PI*y))},
+  arch: {name:"Inverted parabola", dimension:1, limit:10, max:true, target:"10 at x = 3", description:"Climb a smooth arch to find its highest point.", fn:([x]) => 10-(x-3)**2}
+};
+const recordedDraws = [[.61,.86],[.75,.25],[.32,.84]];
+const expected = [
+  {v:-2.58,x:1.42,f:2.0164},
+  {v:1.875,x:-1.125,f:1.265625},
+  {v:0,x:2,f:4}
+];
+function seeded(seed) {
+  let s = seed >>> 0;
+  return () => {s = (Math.imul(s,1664525)+1013904223) >>> 0; return s/4294967296;};
+}
+function bound(n,a,b){return Math.min(b,Math.max(a,n));}
+class Swarm {
+  constructor(key,config,seed=107,lecture=false) {
+    this.obj=objectives[key]; this.cfg={...config}; this.random=seeded(seed);
+    this.lecture=lecture; this.t=0; this.phase=0; this.improvements=0;
+    const {limit,dimension,fn}=this.obj;
+    this.particles=Array.from({length:config.n},(_,i)=>{
+      const x=Array.from({length:dimension},()=>lecture?[4,-3,2][i]:(this.random()*2-1)*limit);
+      const v=x.map(()=>lecture?0:(this.random()*2-1)*limit*.2);
+      return {x,v,f:fn(x),p:x.slice(),pf:fn(x),trail:[x.slice()],terms:null};
+    });
+    this.collectBest(); this.history=[this.best.f];
+  }
+  better(a,b){return this.obj.max?a>b:a<b;}
+  collectBest(){
+    this.particles.forEach((p,i)=>{
+      if(!this.best||this.better(p.pf,this.best.f)) this.best={x:p.p.slice(),f:p.pf,i};
+    });
+  }
+  step() {
+    const {limit,fn}=this.obj, {w,c1,c2}=this.cfg;
+    if(this.phase===0){
+      this.previousBest={...this.best};
+      this.particles.forEach((p,i)=>{
+        p.old=p.x.slice();
+        p.terms=p.x.map((x,d)=>{
+          const [r1,r2]=this.lecture&&this.t===0?recordedDraws[i]:[this.random(),this.random()];
+          const inertia=w*p.v[d], memory=c1*r1*(p.p[d]-x), social=c2*r2*(this.best.x[d]-x);
+          const raw=inertia+memory+social;
+          return {inertia,memory,social,r1,r2,raw,v:this.lecture?raw:bound(raw,-.4*limit,.4*limit)};
+        });
+        p.v=p.terms.map(q=>q.v);
+      });
+      this.phase=1;
+    }else if(this.phase===1){
+      this.particles.forEach(p=>{
+        p.x=p.x.map((x,d)=>bound(x+p.v[d],-limit,limit)); p.f=fn(p.x);
+        p.trail.push(p.x.slice()); if(p.trail.length>14) p.trail.shift();
+      });
+      this.phase=2;
+    }else{
+      this.improvements=0;
+      this.particles.forEach(p=>{
+        if(this.better(p.f,p.pf)){p.p=p.x.slice();p.pf=p.f;this.improvements++;}
+      });
+      this.collectBest(); this.history.push(this.best.f); this.t++; this.phase=0;
+    }
+  }
+}
+function checkLecture(){
+  const s=new Swarm("bowl",{n:3,w:.7,c1:1.5,c2:1.5},1,true);
+  for(let i=0;i<3;i++)s.step();
+  const near=(a,b)=>Math.abs(a-b)<1e-9;
+  const rows=s.particles.map((p,i)=>({p,ok:near(p.v[0],expected[i].v)&&near(p.x[0],expected[i].x)&&near(p.f,expected[i].f)&&near(p.p[0],expected[i].x)}));
+  return {rows,ok:rows.every(row=>row.ok)&&s.best.i===1&&near(s.best.x[0],-1.125)&&near(s.best.f,1.265625)};
+}
+</script><script>const field=document.getElementById("plot");
+let plotRect, cachedTerrain,terrainKey="";
+function coords(x,y,s,W,H){
+  const l=s.obj.limit;
+  const left=38,right=W-18,top=47,bottom=H-27;
+  const fy=s.obj.dimension===1;
+  const ymin=fy?(s.obj.max?-159:0):-l, ymax=fy?(s.obj.max?16:27):l;
+  return [left+(x+l)/(2*l)*(right-left),bottom-(y-ymin)/(ymax-ymin)*(bottom-top)];
+}
+function pointOf(s,pos,W,H){return coords(pos[0],s.obj.dimension===1?s.obj.fn(pos):pos[1],s,W,H);}
+function line(c,x,y,u,v){c.beginPath();c.moveTo(x,y);c.lineTo(u,v);c.stroke();}
+function dot(c,x,y,r,color){c.fillStyle=color;c.beginPath();c.arc(x,y,r,0,2*Math.PI);c.fill();}
+function terrain(s,W,H){
+  const cache=document.createElement("canvas"), ratio=Math.min(devicePixelRatio||1,2);
+  cache.width=W*ratio;cache.height=H*ratio;const c=cache.getContext("2d");c.scale(ratio,ratio);
+  const l=s.obj.limit, left=38, right=W-18, top=47, bottom=H-27;
+  c.fillStyle="#0c302e";c.fillRect(0,0,W,H);
+  const sample=(px,py)=>s.obj.fn([((px-left)/(right-left)*2-1)*l,((bottom-py)/(bottom-top)*2-1)*l]);
+  if(s.obj.dimension===2){
+    const isPeaks=s.obj===objectives.peaks, range=isPeaks?[-6.6,8.2]:[0,83];
+    const colors=[[8,37,48],[12,54,55],[21,77,68],[53,102,73],[102,126,74],[158,158,91]];
+    const res=2,g=document.createElement("canvas");g.width=Math.ceil(W/res);g.height=Math.ceil(H/res);
+    const gc=g.getContext("2d"),img=gc.createImageData(g.width,g.height);
+    for(let y=0;y<g.height;y++)for(let x=0;x<g.width;x++){
+      const z=sample(x*res,y*res),t=bound((z-range[0])/(range[1]-range[0]),0,.9999)*(colors.length-1),k=Math.floor(t);
+      const pix=(y*g.width+x)*4, noise=1.6*Math.sin(x*13.1+y*35.2);
+      for(let j=0;j<3;j++)img.data[pix+j]=colors[k][j]+(colors[k+1][j]-colors[k][j])*(t-k)+noise;
+      img.data[pix+3]=255;
+    }
+    gc.putImageData(img,0,0);c.drawImage(g,0,0,W,H);
+    // Interpolate each crossing so isolines follow the same objective as the particles.
+    const h=isPeaks?5:3, cols=Math.ceil(W/h)+1, rows=Math.ceil(H/h)+1;
+    const values=Array.from({length:rows},(_,j)=>Array.from({length:cols},(_,i)=>sample(i*h,j*h)));
+    const spacing=isPeaks?.32:3;
+    for(let n=Math.ceil(range[0]/spacing);n*spacing<range[1];n++){
+      const level=n*spacing; c.beginPath();
+      for(let j=0;j<rows-1;j++)for(let i=0;i<cols-1;i++){
+        const a=values[j][i],b=values[j][i+1],d=values[j+1][i],e=values[j+1][i+1];
+        if(level<Math.min(a,b,d,e)||level>=Math.max(a,b,d,e))continue;
+        const pts=[],px=i*h,py=j*h;
+        if((a>level)!==(b>level))pts.push([px+h*(level-a)/(b-a),py]);
+        if((b>level)!==(e>level))pts.push([px+h,py+h*(level-b)/(e-b)]);
+        if((d>level)!==(e>level))pts.push([px+h*(level-d)/(e-d),py+h]);
+        if((a>level)!==(d>level))pts.push([px,py+h*(level-a)/(d-a)]);
+        for(let k=1;k<pts.length;k+=2){c.moveTo(...pts[k-1]);c.lineTo(...pts[k]);}
+      }
+      c.strokeStyle=n%4===0?"rgba(221,235,172,.60)":"rgba(195,220,163,.34)";c.lineWidth=n%4===0?1:.65;c.stroke();
+    }
+  }else{
+    c.beginPath();
+    for(let i=0;i<=400;i++){const p=pointOf(s,[-l+2*l*i/400],W,H);if(i===0)c.moveTo(...p);else c.lineTo(...p);}
+    c.strokeStyle="#c9dc92";c.lineWidth=2;c.stroke();
+  }
+  c.font='12px Consolas, monospace';c.lineWidth=.6;c.textAlign="center";
+  for(let i=0;i<=4;i++){
+    const x=left+(right-left)*i/4,y=bottom-(bottom-top)*i/4;
+    c.strokeStyle="rgba(214,238,212,.20)";c.setLineDash([2,5]);line(c,x,top,x,bottom);line(c,left,y,right,y);c.setLineDash([]);
+    c.fillStyle="#d4e5d7";c.fillText(String(Number((-l+2*l*i/4).toFixed(2))),x,bottom+17);
+    const yval=s.obj.dimension===2?(-l+2*l*i/4):s.obj.max?(-159+175*i/4):(27*i/4);
+    c.textAlign="right";c.fillText(String(Number(yval.toFixed(1))),left-5,y+4);c.textAlign="center";
+  }
+  c.textAlign="left";c.fillStyle="#d8e6d6";c.fillText(s.obj.dimension===2?"y":"f(x)",5,top-7);c.fillText("x",right+6,bottom+16);
+  return cache;
+}
+function renderMap(s,selected,showTrails,chart){
+  const {width,height}=field.getBoundingClientRect(),W=Math.round(width),H=Math.round(height);if(!W||!H)return;
+  const ratio=Math.min(devicePixelRatio||1,2);field.width=W*ratio;field.height=H*ratio;
+  const c=field.getContext("2d");c.scale(ratio,ratio);plotRect={W,H};
+  if(chart){drawHistory(c,s,W,H);return;}
+  const key=[s.obj.name,W,H,ratio].join("/");
+  if(key!==terrainKey){cachedTerrain=terrain(s,W,H);terrainKey=key;}
+  c.drawImage(cachedTerrain,0,0,W,H);c.save();c.beginPath();c.rect(30,39,W-39,H-55);c.clip();
+  s.particles.forEach((p,i)=>{
+    if(showTrails&&p.trail.length>1){
+      c.lineWidth=i===selected?1.8:1;c.strokeStyle=i===selected?"#c0f6db":"rgba(202,246,226,.42)";c.beginPath();
+      p.trail.forEach((pos,j)=>{const pt=pointOf(s,pos,W,H);if(j===0)c.moveTo(...pt);else c.lineTo(...pt);});c.stroke();
+    }
+    if(s.phase===1){
+      const end=p.x.map((x,d)=>bound(x+p.v[d],-s.obj.limit,s.obj.limit));
+      c.setLineDash([3,3]);c.strokeStyle=i===selected?"#f6ffe8":"#b2d4be";c.lineWidth=i===selected?2:1;
+      line(c,...pointOf(s,p.x,W,H),...pointOf(s,end,W,H));c.setLineDash([]);
+    }
+  });
+  s.particles.forEach((p,i)=>{
+    const [x,y]=pointOf(s,p.x,W,H);dot(c,x,y,4.1,"#0b4035");dot(c,x,y,2.9,"#e7f6cf");
+    if(i===selected){c.strokeStyle="#9ef8e6";c.lineWidth=1.5;c.beginPath();c.arc(x,y,8,0,2*Math.PI);c.stroke();
+      c.font="bold 12px Consolas, monospace";c.fillStyle="#0d302bf2";const tx=x>W-65?x-44:x+10;c.fillRect(tx,y-18,31,18);c.fillStyle="#d8fae8";c.fillText("P"+String(i+1).padStart(2,"0"),tx+4,y-5);}
+  });
+  const [gx,gy]=pointOf(s,s.best.x,W,H);c.translate(gx,gy);c.rotate(Math.PI/4);
+  c.strokeStyle="#ffd076";c.fillStyle="#f0b354";c.lineWidth=1.4;c.strokeRect(-6,-6,12,12);c.fillRect(-2.3,-2.3,4.6,4.6);c.restore();
+}
+function drawHistory(c,s,W,H){
+  c.fillStyle="#0d322f";c.fillRect(0,0,W,H);const a=s.history,min=Math.min(...a),max=Math.max(...a),pad=Math.max((max-min)*.12,Math.abs(max)*.015,.00001);
+  const lo=min-pad,hi=max+pad,left=69,right=W-23,top=62,bottom=H-34;
+  const Y=v=>bottom-(v-lo)/(hi-lo)*(bottom-top),X=t=>left+t/Math.max(1,s.t)*(right-left);
+  c.font="12px Consolas, monospace";
+  for(let i=0;i<=4;i++){const val=lo+(hi-lo)*i/4,y=Y(val);c.strokeStyle="#496c5d";line(c,left,y,right,y);c.fillStyle="#d2e6d7";c.textAlign="right";c.fillText(fmt(val,3),left-6,y+4);}
+  c.beginPath();c.moveTo(X(0),Y(a[0]));for(let i=1;i<a.length;i++){c.lineTo(X(i),Y(a[i-1]));c.lineTo(X(i),Y(a[i]));}
+  c.lineWidth=2.6;c.strokeStyle="#c6e9a1";c.stroke();dot(c,X(s.t),Y(a[s.t]),4,"#ffca78");
+  c.textAlign="left";c.fillStyle="#d2e6d7";c.fillText("0",left,bottom+20);c.textAlign="right";c.fillText("iteration "+s.t,right,bottom+20);
+}
+function decorations(){
+  const mark=document.getElementById("mark").getContext("2d");mark.scale(2,2);mark.lineWidth=1.55;mark.strokeStyle="#1f644b";
+  for(let n=0;n<5;n++){mark.beginPath();for(let i=0;i<=140;i++){const t=i*Math.PI/70,r=(5+n*2.65)*(1+.12*Math.sin(3*t+.3)+.08*Math.cos(2*t));const x=19.2+r*Math.cos(t),y=20+r*Math.sin(t);if(i===0)mark.moveTo(x,y);else mark.lineTo(x,y);}mark.stroke();}
+  const c=document.getElementById("engraving").getContext("2d");c.translate(214,123);c.scale(1.42,1.42);
+  const project=(x,y)=>[(x-y)*22,(x+y)*8-objectives.peaks.fn([x,y])*8.5];
+  c.lineWidth=.75;
+  for(let axis=0;axis<2;axis++)for(let k=0;k<=26;k++){
+    const a=-3+6*k/26;c.beginPath();for(let i=0;i<=100;i++){const b=-3+6*i/100,p=axis?project(a,b):project(b,a);if(!i)c.moveTo(...p);else c.lineTo(...p);}
+    c.strokeStyle=axis?"#74a089":"#9cb69d";c.stroke();
+  }
+  const p=project(-.009,1.581);dot(c,...p,2.4,"#ba8c40");
+}
+</script><script>const $=id=>document.getElementById(id);
+const icons={
+  map:"<path d='m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15m6-12v15'/>",
+  book:"<path d='M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1zm0 0v14'/>",
+  calc:"<rect x='5' y='2.5' width='14' height='19' rx='2'/><path d='M8 7h8M8 11h2m4 0h2m-8 4h2m4 0h2m-8 3h2'/>",
+  play:"<path d='m7 4 12 8-12 8z' fill='currentColor' stroke='none'/>",pause:"<path d='M8 5v14m8-14v14' stroke-width='4'/>",
+  step:"<path d='m5 5 10 7-10 7zm13 0v14'/>",reset:"<path d='M3 4v6h6M4 9a8 8 0 1 1 .8 8'/>",
+  sliders:"<path d='M4 5h8m4 0h4M4 12h2m4 0h10M4 19h10m4 0h2'/><circle cx='14' cy='5' r='2'/><circle cx='8' cy='12' r='2'/><circle cx='16' cy='19' r='2'/>",
+  notes:"<rect x='5' y='3' width='14' height='18' rx='2'/><path d='M9 3v18m3-12h4m-4 4h4M3 7h3m-3 5h3m-3 5h3'/>",
+  cross:"<circle cx='12' cy='12' r='7'/><path d='M12 2v5m0 10v5M2 12h5m10 0h5'/>",close:"<path d='m6 6 12 12M6 18 18 6'/>"
+};
+const icon=k=>'<i aria-hidden="true"><svg viewBox="0 0 24 24">'+icons[k]+'</svg></i>';
+document.querySelectorAll("[data-icon]").forEach(el=>{el.outerHTML=icon(el.dataset.icon);});
+const config={n:24,w:.7,c1:1.5,c2:1.5};
+const ranges=[["n","Swarm size","N",3,48,1],["w","Inertia","w",0,1.2,.05],["c1","Personal pull","c₁",0,3,.05],["c2","Social pull","c₂",0,3,.05]];
+let sim, selected=0, playing=false, lecture=false, view="map",timer=null, seed=107;
+const maxIterations=100;
+function fmt(x,d=4){if(x===0)return "0";if(Math.abs(x)<.5*10**(-d))return x.toExponential(2);return String(Number(x.toFixed(d)));}
+const vec=(v,d=3)=>v.length===1?fmt(v[0],d):"("+v.map(x=>fmt(x,d)).join(", ")+")";
+const pid=i=>"P"+String(i+1).padStart(2,"0");
+$("problem").innerHTML=Object.entries(objectives).map(([k,o])=>'<option value="'+k+'">'+o.name+'</option>').join("");
+$("sliders").innerHTML=ranges.map(([k,name,symbol,min,max,step])=>'<div><div class="slidertop"><label for="'+k+'">'+name+' <small>'+symbol+'</small></label><output for="'+k+'" id="'+k+'Val"></output></div><input type="range" id="'+k+'" min="'+min+'" max="'+max+'" step="'+step+'" value="'+config[k]+'"></div>').join("");
+function controlValues(){
+  for(const [k,,,min,max] of ranges){const el=$(k);el.value=config[k];el.style.setProperty("--pct",100*(config[k]-min)/(max-min)+"%");$(k+"Val").textContent=k==="n"?config[k]:config[k].toFixed(2);}
+}
+function stop(){playing=false;clearTimeout(timer);timer=null;}
+function reset(){
+  stop();sim=new Swarm($("problem").value,config,seed,lecture);selected=bound(selected,0,config.n-1);
+  $("particle").innerHTML=sim.particles.map((p,i)=>'<option value="'+i+'">'+pid(i)+'</option>').join("");
+  $("problemHint").textContent=sim.obj.description;
+  $("configHint").textContent=lecture?"Lecture replay uses recorded draws for the first iteration. Editing a parameter opens a seeded experiment.":"Changing a parameter restarts the run from the same seed.";
+  controlValues();render();
+}
+function advance(){if(sim.t<maxIterations)sim.step();if(sim.t>=maxIterations) stop();render();}
+function schedule(){clearTimeout(timer);if(playing)timer=setTimeout(()=>{advance();schedule();},Number($("speed").value));}
+function togglePlay(){if(playing){stop();render();}else if(sim.t<maxIterations){playing=true;advance();schedule();}}
+function describe(){
+  const p=sim.particles[selected],id=pid(selected),goal=sim.obj.max?"highest":"lowest";
+  if(sim.phase===1)return ["01 / 03 · Velocity","Choose the next move.",
+    id+" combines its momentum, its own best position, and the swarm’s shared best. Its new velocity is "+vec(p.v)+". Dashed lines show the planned moves."];
+  if(sim.phase===2)return ["02 / 03 · Position & fitness","Move and measure.",
+    id+" moves from "+vec(p.old)+" to "+vec(p.x)+" and scores "+fmt(p.f)+". Each particle is evaluated at its new location. The best memories still hold their previous values."];
+  if(sim.t===0)return ["Initialization","Meet the swarm.",
+    "Each of the "+config.n+" particles remembers its starting position. "+pid(sim.best.i)+" has the "+goal+" initial score, so the swarm uses its position as the first shared best."];
+  const improved=sim.better(sim.best.f,sim.previousBest.f);
+  return ["03 / 03 · Update memory",sim.t===maxIterations?"Iteration limit reached.":improved?"A new swarm best.":"Keep the best discovery.",
+    sim.improvements+" of "+config.n+" particles improved their own records. "+(improved?pid(sim.best.i)+" improved the shared best from "+fmt(sim.previousBest.f)+" to "+fmt(sim.best.f)+".":"The swarm keeps its previous best of "+fmt(sim.best.f)+".")+" The next move uses this shared memory."];
+}
+function render(){
+  const p=sim.particles[selected],it=sim.t+(sim.phase?1:0);
+  $("play").innerHTML=icon(playing?"pause":"play")+(playing?"Pause":"Play");$("step").disabled=$("play").disabled=sim.t>=maxIterations;
+  $("status").textContent=sim.t>=maxIterations?"Complete":playing?"Playing":sim.t===0&&sim.phase===0?"Ready":"Paused";
+  $("maplabel").textContent=view==="map"?(lecture?"Lecture replay":sim.obj.name)+" / "+sim.obj.dimension+"D":"Best fitness history";
+  $("iteration").textContent="Iteration "+String(it).padStart(3,"0")+" / 100";
+  $("fitness").textContent=fmt(sim.best.f);$("bestPosition").textContent=vec(sim.best.x);
+  const [phase,title,explanation]=describe();$("phaseLine").textContent=phase;$("stepTitle").textContent=title;$("explain").textContent=explanation;
+  $("particle").value=selected;
+  $("mapTab").setAttribute("aria-pressed",view==="map");$("chartTab").setAttribute("aria-pressed",view==="chart");
+  $("legend").innerHTML=view==="map"?'<span><b class="keydot"></b>Particle</span><span><b class="keybest"></b>Swarm best</span><span><b class="keyprobe"></b>Tracked particle</span>':'<span><b class="keydot"></b>Best recorded fitness per completed iteration</span>';
+  const terms=p.terms;
+  const term=(label,value)=>'<div class="term"><span>'+label+'</span><b>'+value+'</b></div>';
+  $("probe").innerHTML='<div><div class="eyeline">'+pid(selected)+' · '+(sim.obj.max?"Maximize":"Minimize")+'</div><p>Position <b class="num">'+vec(p.x)+'</b> · Fitness <b class="num">'+fmt(p.f)+'</b></p><p>Personal best <b class="num">'+vec(p.p)+'</b></p></div><div><div class="terms">'+(terms?["inertia","memory","social"].map((k,i)=>term(["Inertia","Personal pull","Social pull"][i],vec(terms.map(q=>q[k])))).join(""):term("Starting velocity",vec(p.v)))+'</div><p class="hint">'+(terms?(lecture?"Velocity is the sum of these three terms.":"The sum is capped at 20% of the search range per axis."):"Step once to inspect the three contributions to velocity.")+'</p></div>';
+  if($("population").open)renderRows();
+  renderMap(sim,selected,$("trails").checked,view==="chart");
+}
+function renderRows(){$("rows").innerHTML=sim.particles.map((p,i)=>'<tr class="'+(i===selected?"activeRow":"")+'"><th scope="row">'+pid(i)+'</th><td>'+vec(p.x)+'</td><td>'+vec(p.v)+'</td><td>'+fmt(p.f)+'</td><td>'+vec(p.p)+'</td><td>'+fmt(p.pf)+'</td></tr>').join("");}
+$("population").ontoggle=()=>{if($("population").open)renderRows();};
+$("problem").onchange=()=>{lecture=false;selected=0;reset();};
+for(const [k] of ranges)$(k).oninput=()=>{config[k]=Number($(k).value);lecture=false;reset();};
+$("play").onclick=togglePlay;$("step").onclick=()=>{stop();advance();};$("reset").onclick=reset;$("speed").onchange=schedule;
+$("particle").onchange=()=>{selected=Number($("particle").value);render();};
+$("trails").onchange=render;
+$("mapTab").onclick=()=>{view="map";render();};$("chartTab").onclick=()=>{view="chart";render();};
+field.onclick=e=>{
+  if(view!=="map")return;
+  const r=field.getBoundingClientRect();let best=17,found=selected;
+  sim.particles.forEach((p,i)=>{const [x,y]=pointOf(sim,p.x,plotRect.W,plotRect.H);const d=Math.hypot(e.clientX-r.left-x,e.clientY-r.top-y);if(d<best){best=d;found=i;}});
+  selected=found;render();
+};
+function dialog(html){
+  stop();render();$("reading").innerHTML=html;$("reader").showModal();$("reader").scrollTop=0;
+}
+$("close").onclick=()=>$("reader").close();
+$("reader").onclick=e=>{if(e.target===$("reader")){const r=$("reader").getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$("reader").close();}};
+$("guideBtn").onclick=()=>dialog('<h2>Field guide</h2><h3>Read the field</h3><p>Each dot is a candidate solution. On a 2D landscape, both axes are inputs. Contours join positions with the same fitness, and lighter bands mark higher values. On a 1D problem the vertical axis shows fitness directly. The gold diamond marks the best position found so far.</p><p><b>'+sim.obj.name+'</b> · '+sim.obj.description+' Its reference optimum is '+sim.obj.target+'. The swarm only receives scores at the positions it samples.</p><h3>Follow one particle</h3><p>Click a dot or choose a particle in the inspector. Step through one full iteration in three clicks. First calculate velocity, then move and score each particle, then update the memories. A trail shows its last fourteen positions.</p><div class="equation">v′ = wv + c₁r₁(p − x) + c₂r₂(g − x)<br>x′ = x + v′</div><p>Inertia carries the previous velocity forward. Personal pull points toward the particle’s best visit, p. Social pull points toward the swarm’s best visit, g. Independent random weights r₁ and r₂ scale the pulls on each axis. Every particle uses the same previous swarm best for a given iteration.</p><h3>Run an experiment</h3><p>Set social pull to zero and watch the paths. Reset, then raise social pull and compare how quickly the particles gather. Reset reuses the seed so you can compare settings from the same starting positions for a fixed swarm size.</p><p>Exploration uses fixed inertia, a speed limit of 20% of the search range per axis, and positions clipped to the domain. Playback stops after 100 iterations. The worked example uses the lecture’s unclamped velocities and recorded first-step draws.</p><p class="sources">Course references · <i>PSO-Lecture Notes</i>, sections 2–6, and A. P. Engelbrecht, <i>Computational Intelligence: An Introduction</i>, chapter 16, sections 16.1.1 and 16.1.4.</p>');
+$("exampleBtn").onclick=()=>{
+  const check=checkLecture();
+  dialog('<div class="eyeline">Lecture notes · Problem 1 · pp. 3–4</div><h2>One move, by hand.</h2><p>Minimize f(x) = x². Three particles start at 4, −3, and 2 with zero velocity. Their scores are 16, 9, and 4, so the first shared best is x = 2. Use w = 0.7 and c₁ = c₂ = 1.5.</p><h3>Calculate P01’s first move</h3><p>Use the lecture’s draws r₁ = 0.61 and r₂ = 0.86. P01 starts at its own best, so only the social term moves it.</p><div class="equation">v′ = 0.7(0) + 1.5(0.61)(4 − 4) + 1.5(0.86)(2 − 4) = −2.58<br>x′ = 4 − 2.58 = 1.42<br>f(x′) = 1.42² = 2.0164</div><h3>Check the whole swarm</h3><p>The simulator runs the same three updates and compares its velocity, position, fitness, and memory with the hand values below.</p><div class="scrolltable"><table><thead><tr><th>Particle</th><th>r₁ / r₂</th><th>Hand v′</th><th>Hand x′</th><th>Hand f</th><th>Simulator f</th></tr></thead><tbody>'+expected.map((e,i)=>'<tr><th>'+pid(i)+'</th><td>'+recordedDraws[i].join(' / ')+'</td><td>'+e.v+'</td><td>'+e.x+'</td><td>'+e.f+'</td><td>'+fmt(check.rows[i].p.f,6)+'</td></tr>').join("")+'</tbody></table></div><p class="passed">'+(check.ok?"✓ All three particles and the shared best match.":"Comparison failed.")+'</p><p>P02 takes the lead at x = −1.125 with f = 1.265625. Replay the first iteration with three clicks of Step. Later iterations use seeded draws.</p><button id="loadLecture" class="primary">'+icon("play")+'Replay in simulator</button>');
+  $("loadLecture").onclick=()=>{lecture=true;$("problem").value="bowl";Object.assign(config,{n:3,w:.7,c1:1.5,c2:1.5});selected=0;view="map";$("reader").close();reset();$("step").focus();};
+};
+decorations();reset();
+new ResizeObserver(()=>renderMap(sim,selected,$("trails").checked,view==="chart")).observe(field.parentElement);
+</script></body></html>

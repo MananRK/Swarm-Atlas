@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f7f2"><meta name="description" content="Explore particle swarm optimization on live contour maps and replay a lecture calculation one move at a time.">
+<title>Swarm Atlas · Particle Swarm Optimization</title>
+<style>/* STYLES */</style></head>
+<body>
+<header><div class="navwrap"><a class="brand" href="#top"><canvas id="mark" width="78" height="78" aria-hidden="true"></canvas>Swarm Atlas</a><span class="brandtype">Optimization lab</span><nav aria-label="Learning resources"><button id="guideBtn"><i data-icon="book"></i>Field guide</button><button id="exampleBtn"><i data-icon="calc"></i>Worked example</button></nav></div></header>
+<main id="top">
+<section class="intro"><div><h1>Particle Swarm <em>Optimization</em></h1><p>Follow a swarm as it learns from its own discoveries and the best of the group.</p></div><canvas id="engraving" width="420" height="190" aria-hidden="true"></canvas></section>
+<div class="workspace">
+<section class="board">
+<div class="board-head"><h2><i data-icon="map"></i>Swarm field</h2><div class="switch" aria-label="Visualization"><button id="mapTab" aria-pressed="true">Landscape</button><button id="chartTab" aria-pressed="false">Convergence</button></div></div>
+<div class="plotbox"><canvas id="plot" aria-label="Swarm landscape. Select a particle on the plot or use the particle inspector below."></canvas><span class="maplabel" id="maplabel"></span><span id="status" class="status"></span></div>
+<div class="plotkey" id="legend"></div>
+<div class="transport"><button id="play" class="primary"></button><button id="step"><i data-icon="step"></i>Step</button><button id="reset" aria-label="Reset simulation" title="Reset simulation"><i data-icon="reset"></i></button><label class="speed">Speed <select id="speed"><option value="1700">0.5×</option><option selected value="850">1×</option><option value="425">2×</option><option value="210">4×</option></select></label></div>
+</section>
+<aside class="setup"><div class="sectionhead"><i data-icon="sliders"></i><h2>Experiment setup</h2></div>
+<label class="caption" for="problem">Objective function</label><select id="problem"></select><p class="hint" id="problemHint"></p>
+<div class="rule"></div><div class="sliderlist" id="sliders"></div>
+<div class="rule"></div><div class="toggleline"><label for="trails">Particle trails</label><input type="checkbox" role="switch" id="trails" checked></div>
+<p id="configHint" class="hint small">Changing a parameter restarts the run from the same seed.</p>
+</aside></div>
+<section class="notebook"><div class="notetop"><h2><i data-icon="notes"></i>Step notebook</h2><span id="iteration" class="mono"></span></div><div class="notebody"><div><div id="phaseLine" class="eyeline"></div><h3 id="stepTitle"></h3><p id="explain"></p></div><div class="metrics"><div><span>Best fitness</span><strong id="fitness"></strong></div><div><span>Best position</span><strong id="bestPosition"></strong></div></div></div></section>
+<section class="inspection"><div class="notetop"><h2><i data-icon="cross"></i>Particle inspector</h2><label class="particlepick">Track <select id="particle"></select></label></div><div id="probe" class="probe"></div><details id="population"><summary>View swarm data</summary><div class="scrolltable"><table><thead><tr><th>Particle</th><th>Position</th><th>Velocity</th><th>Fitness</th><th>Personal best</th><th>Best fitness</th></tr></thead><tbody id="rows"></tbody></table></div></details></section>
+</main><footer><span>Swarm Atlas</span><span>Particle swarm optimization laboratory</span></footer>
+<dialog id="reader"><div class="modalhead"><span class="brandmini">Swarm Atlas</span><button id="close" aria-label="Close dialog"><i data-icon="close"></i></button></div><div id="reading"></div></dialog>
+<script>/* ENGINE */</script><script>/* MAP */</script><script>/* APP */</script></body></html>
